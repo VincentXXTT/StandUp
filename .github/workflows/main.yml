@@ -1,4 +1,4 @@
-name: Code Task
+name: Stand Task
 
 on:
   schedule:
