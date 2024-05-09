@@ -1,6 +1,6 @@
 #!/bin/bash
 # 定义配置名字列表
-names=("陈晗" "刘入菲" "刘文宾" "陶星蒙" "肖亭" "岳潇逸" "喻涵" "祝赫" "许俊")
+names=("\u9648\u6657" "\u5218\u5165\u83f2" "\u5218\u6587\u5bbe" "\u9676\u661f\u8499" "\u80e1\u4e54\u63b2" "\u5463\u6f47\u901f" "\u559c\u6db5" "\u795d\u8dab" "\u8bb8\u4fca")
 
 # 获取当前配置名字的索引
 index=$(cat /tmp/current_index_s 2>/dev/null)
