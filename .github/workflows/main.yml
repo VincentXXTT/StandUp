@@ -2,7 +2,7 @@ name: Code Task
 
 on:
   schedule:
-    - cron: '*/5 * * * 1-5'
+    - cron: '*/2 * * * 1-5'
 
   workflow_dispatch:
 
