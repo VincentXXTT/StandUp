@@ -1,28 +1,18 @@
-#!/bin/bash
-# 定义配置名字列表
-names=("\u9648\u6657" "\u5218\u5165\u83f2" "\u5218\u6587\u5bbe" "\u9676\u661f\u8499" "\u80e1\u4e54\u63b2" "\u5463\u6f47\u901f" "\u559c\u6db5" "\u795d\u8dab" "\u8bb8\u4fca")
+name: Scheduled Task
 
-# 获取当前配置名字的索引
-index=$(cat /tmp/current_index_s 2>/dev/null)
-index=${index:-0}
+on:
+  schedule:
+    - cron: '* * * * *'
 
-# 获取当前配置名字
-current_name=${names[$index]}
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# 构建 JSON 字符串，注意将变量放在双引号中
-json="{
-        \"msgtype\": \"text\",
-        \"text\": {
-            \"content\": \"stand up时间到了，今日host是 $current_name\",
-            \"mentioned_list\": [\"@all\"]
-        }
-    }"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-# 执行命令，并将 JSON 字符串传递给 curl
-curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf98-3d268c31987b' \
-   -H 'Content-Type: application/json' \
-   -d "$json"
-
-# 更新索引，下次使用下一个配置名字
-index=$((index + 1))
-echo $index > /tmp/current_index_s
+      - name: Run shell script
+        run: |
+          chmod +x omni_stand_up.sh
+          ./omni_stand_up.sh
