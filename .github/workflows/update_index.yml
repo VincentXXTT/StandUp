@@ -23,7 +23,8 @@ jobs:
 
       - name: Modify index
         run: |
-          current_index=$(( $(echo "$current_index") + 1 ))
+          names=("陈晗" "刘入菲" "刘文宾" "陶星蒙" "肖亭" "岳潇逸" "喻唅" "祝赫" "许俊")
+          current_index=$((($current_index + 1) % ${#names[@]}))
           echo "Modified index is: $current_index"
           echo $current_index > current_index.txt
 
