@@ -10,7 +10,7 @@ index=${index:-0}
 current_name=${names[$index]}
 
 # 执行命令
-curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf98-3d268c31987b' \
+curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b938769b-2e38-4e79-94c0-62aff7fff328' \
    -H 'Content-Type: application/json' \
    -d '
    {
