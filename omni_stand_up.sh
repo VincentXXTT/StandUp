@@ -16,7 +16,7 @@ curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf
    {
         "msgtype": "text",
         "text": {
-            "content": "stand up时间到了，今日host是'$current_name'",
+            "content": "当前时间是：$(date +"%Y-%m-%d %H:%M:%S")，stand up时间到了，今日host是'$current_name'",
             "mentioned_list": ["@all"]
         }
    }'
