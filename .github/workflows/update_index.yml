@@ -9,46 +9,28 @@ on:
 jobs:
   update_index:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Read current index
-        id: read_index
-        run: echo "::set-output name=index::$(cat current_index_1.txt 2>/dev/null || echo 0)"
 
-      - name: Update current index
-        id: update_index
+      - name: Read current_index.txt
+        id: read-index
         run: |
-          # 读取当前索引值
-          index=${{ steps.read_index.outputs.index }}
-          
-          # 更新索引值
-          index=$((($index + 1) % ${#names[@]}))
+          current_index=$(cat current_index.txt)
+          echo "Current index is: $current_index"
+          echo "::set-output name=index::$current_index"
 
-          # 将新的索引值写入文件
-          echo $index > current_index_1.txt
-          echo "::set-output name=index::$index"
-
-      - name: Send notification
-        if: ${{ success() }}
+      - name: Modify index
         run: |
-          # 定义配置名字列表
-          names=("陈晗" "刘入菲" "刘文宾" "陶星蒙" "肖亭" "岳潇逸" "喻唅" "祝赫" "许俊")
-          # 获取更新后的索引值
-          updated_index=${{ steps.update_index.outputs.index }}
+          current_index=$(( $(echo "$current_index") + 1 ))
+          echo "Modified index is: $current_index"
+          echo $current_index > current_index.txt
 
-          # 获取当前配置名字
-          current_name=${names[$updated_index]}
-          
-          # 执行命令
-          curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf98-3d268c31987b' \
-             -H 'Content-Type: application/json' \
-             -d '
-             {
-                  "msgtype": "text",
-                  "text": {
-                      "content": "stand up时间到了，今日host是'$current_name'",
-                      "mentioned_list": ["@all"]
-                  }
-             }'
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add current_index.txt
+          git commit -m "Update current_index.txt"
+          git push
