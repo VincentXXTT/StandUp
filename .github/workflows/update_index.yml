@@ -29,8 +29,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "15327163498@163.com"
+          git config --local user.name "VincentXXTT"
           git add current_index.txt
           git commit -m "Update current_index.txt"
           git push
