@@ -1,0 +1,32 @@
+name: Update Current Index
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update_index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Update current index
+        run: |
+          # 获取当前索引值
+          index=$(cat current_index.txt 2>/dev/null)
+          index=${index:-0}
+
+          # 更新索引值
+          index=$((($index + 1) % ${#names[@]}))
+
+          # 将新的索引值写入文件
+          echo $index > current_index.txt
+
+          # 提交文件修改到 GitHub
+          git config user.email "github-actions@users.noreply.github.com"
+          git config user.name "GitHub Actions"
+          git add current_index.txt
+          git commit -m "Update current index"
+          git push
