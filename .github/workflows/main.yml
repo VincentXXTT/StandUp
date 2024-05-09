@@ -2,7 +2,7 @@ name: Stand Task
 
 on:
   schedule:
-    - cron: '*/2 * * * 1-5'
+    - cron: '40 9 * * 1-5'
 
   workflow_dispatch:
 
