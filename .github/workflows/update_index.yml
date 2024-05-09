@@ -33,4 +33,5 @@ jobs:
           git config --local user.name "VincentXXTT"
           git add current_index.txt
           git commit -m "Update current_index.txt"
-          git push
+          git push https://$GH_PAT@github.com/VincentXXTT/StandUp.git HEAD:main
+
