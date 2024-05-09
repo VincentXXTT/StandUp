@@ -25,5 +25,3 @@ curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf
 index=$((($index + 1) % ${#names[@]}))
 echo $index > /tmp/current_index_s
 
-echo "$(date) - Stand Up Script executed successfully" >> /Users/ting.xiao/Desktop/zeiss/cron_log.txt
-
