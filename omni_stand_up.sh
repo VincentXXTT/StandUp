@@ -8,22 +8,23 @@ index=${index:-0}
 
 # 获取当前配置名字
 current_name=${names[$index]}
+date_time=$(date +"%Y-%m-%d %H:%M:%S")
 
-# 执行命令
-curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf98-3d268c31987b' \
-   -H 'Content-Type: application/json' \
-   -d '
-   {
+# 构建 JSON 字符串
+json='{
         "msgtype": "text",
         "text": {
-            "content": "当前时间是：$(date +"%Y-%m-%d %H:%M:%S")，stand up时间到了，今日host是'$current_name'",
+            "content": "当前时间是：'$date_time'，stand up时间到了，今日host是'$current_name'",
             "mentioned_list": ["@all"]
         }
-   }'
+    }'
+
+# 执行命令，并将 JSON 字符串传递给 curl
+curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf98-3d268c31987b' \
+   -H 'Content-Type: application/json' \
+   -d "$json"
 
 # 更新索引，下次使用下一个配置名字
 index=$((($index + 1) % ${#names[@]}))
 echo $index > /tmp/current_index_s
-
-echo "$(date) - Stand Up Script executed successfully" >> /Users/ting.xiao/Desktop/zeiss/cron_log.txt
 
