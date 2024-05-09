@@ -21,10 +21,7 @@ curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf
         }
    }'
 
-# 更新索引，下次使用下一个配置名字
+# 更新索引，下次使用下一个配置名字,将索引值写入项目根目录下的 current_index.txt 文件中
 index=$((($index + 1) % ${#names[@]}))
-echo $index > /tmp/current_index_s
-
-# 将索引值写入项目根目录下的 current_index.txt 文件中
 echo $index > current_index.txt
 
