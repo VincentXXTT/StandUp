@@ -2,7 +2,7 @@ name: Update Current Index
 
 on:
   schedule:
-    - cron: '10 4 * * 1-5'
+    - cron: '45 3 * * 1-5'
   workflow_dispatch:
 
 jobs:
