@@ -1,9 +1,6 @@
 name: Stand Task
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '35 1 * * 1-5'
 
