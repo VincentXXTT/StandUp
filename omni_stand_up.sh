@@ -9,15 +9,21 @@ index=${index:-0}
 # 获取当前配置名字
 current_name=${names[$index]}
 
+# 计算下一个名字的索引
+next_index=$((index + 1))
+next_index=$((next_index % ${#names[@]}))
+
+# 获取下一个配置名字
+next_name=${names[next_index]}
+
 # 执行命令
-curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b938769b-2e38-4e79-94c0-62aff7fff328' \
+curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=71196606-1470-4a4e-bf98-3d268c31987b' \
    -H 'Content-Type: application/json' \
    -d '
    {
         "msgtype": "text",
         "text": {
-            "content": "stand up时间到了，今日host是'$current_name'",
+            "content": "stand up时间9点45，今日host是'$current_name', 明日host是'$next_name'",
             "mentioned_list": ["@all"]
         }
    }'
-
