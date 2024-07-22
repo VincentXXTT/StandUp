@@ -22,7 +22,7 @@ jobs:
 
       - name: Modify index
         run: |
-          names=("陈晗" "刘入菲" "陶星蒙" "肖亭" "岳潇逸" "喻唅" "祝赫" "许俊")
+          names=("陈晗" "刘入菲" "刘文宾" "陶星蒙" "肖亭" "岳潇逸" "喻唅" "祝赫" "许俊")
           current_index=$(( $(echo "${{ steps.read-index.outputs.index }}") + 1 ))
           index_size=${#names[@]}
           current_index=$((current_index % index_size))
